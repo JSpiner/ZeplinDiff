@@ -31,7 +31,7 @@
 
         <activity android:name=".screen.ScreenActivity" />
 
-        <service android:name=".ZeplinHoverMenuService" />
+        <service android:name=".ViewerService"/>
 
     </application>
 
