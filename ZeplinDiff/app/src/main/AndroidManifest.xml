@@ -31,7 +31,7 @@
 
         <activity android:name=".ui.screen.ScreenActivity" />
 
-        <service android:name=".ViewerService"/>
+        <service android:name=".ui.viewer.ViewerService"/>
 
     </application>
 

@@ -1,13 +1,19 @@
-package net.jspiner.zeplindiff;
+package net.jspiner.zeplindiff.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import net.jspiner.zeplindiff.ZplinDiffApplication;
+
 public class KeyManager {
+
+    private static final String PREFERENCE_NAME = "zeplindiff";
+
+    private static final String KEY_TOKEN = "token";
 
     private static SharedPreferences getSharedPreference(){
         return ZplinDiffApplication.getInstance().getSharedPreferences(
-                "zeplindiff",
+                PREFERENCE_NAME,
                 Context.MODE_PRIVATE
         );
     }
@@ -17,10 +23,10 @@ public class KeyManager {
     }
 
     public static void putToken(String token){
-        getEditor().putString("token", token).commit();
+        getEditor().putString(KEY_TOKEN, token).commit();
     }
 
     public static String getToken(){
-        return getSharedPreference().getString("token", null);
+        return getSharedPreference().getString(KEY_TOKEN, null);
     }
 }

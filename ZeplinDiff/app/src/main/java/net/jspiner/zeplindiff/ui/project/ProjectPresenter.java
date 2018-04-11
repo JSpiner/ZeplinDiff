@@ -1,6 +1,6 @@
 package net.jspiner.zeplindiff.ui.project;
 
-import net.jspiner.zeplindiff.KeyManager;
+import net.jspiner.zeplindiff.utils.KeyManager;
 import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.ui.base.BasePresenter;
 

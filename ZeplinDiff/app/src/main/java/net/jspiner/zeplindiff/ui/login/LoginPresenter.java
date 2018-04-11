@@ -3,13 +3,11 @@ package net.jspiner.zeplindiff.ui.login;
 import android.os.Build;
 import android.text.TextUtils;
 
-import net.jspiner.zeplindiff.KeyManager;
+import net.jspiner.zeplindiff.utils.KeyManager;
 import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.model.User;
 import net.jspiner.zeplindiff.ui.base.BasePresenter;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class LoginPresenter extends BasePresenter<Contract.View> implements Contract.Presenter {

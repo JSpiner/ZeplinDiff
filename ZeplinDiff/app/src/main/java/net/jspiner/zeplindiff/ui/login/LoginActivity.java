@@ -1,32 +1,18 @@
 package net.jspiner.zeplindiff.ui.login;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import net.jspiner.zeplindiff.KeyManager;
 import net.jspiner.zeplindiff.R;
-import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.databinding.ActivityLoginBinding;
-import net.jspiner.zeplindiff.model.User;
 import net.jspiner.zeplindiff.ui.base.BaseActivity;
-import net.jspiner.zeplindiff.ui.base.BasePresenterInterface;
 import net.jspiner.zeplindiff.ui.project.ProjectActivity;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, Contract.Presenter> implements Contract.View {
 

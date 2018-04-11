@@ -1,4 +1,4 @@
-package net.jspiner.zeplindiff;
+package net.jspiner.zeplindiff.ui.viewer;
 
 import android.app.Service;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.SeekBar;
 
 import com.bumptech.glide.Glide;
 
+import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.databinding.ViewToggleBinding;
 import net.jspiner.zeplindiff.databinding.ViewViewerBinding;
 

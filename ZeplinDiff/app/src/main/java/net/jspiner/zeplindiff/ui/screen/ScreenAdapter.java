@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.model.Screen;
+import net.jspiner.zeplindiff.ui.screen.viewholder.ScreenViewHolder;
 
 import java.util.ArrayList;
 

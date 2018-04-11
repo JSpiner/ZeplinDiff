@@ -1,4 +1,4 @@
-package net.jspiner.zeplindiff.ui.screen;
+package net.jspiner.zeplindiff.ui.screen.viewholder;
 
 import android.content.Intent;
 import android.databinding.ViewDataBinding;
@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 
-import net.jspiner.zeplindiff.ViewerService;
+import net.jspiner.zeplindiff.ui.viewer.ViewerService;
 import net.jspiner.zeplindiff.databinding.CardScreenBinding;
 import net.jspiner.zeplindiff.model.Screen;
 
