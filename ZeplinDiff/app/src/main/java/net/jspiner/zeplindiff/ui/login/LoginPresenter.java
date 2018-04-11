@@ -52,12 +52,9 @@ public class LoginPresenter extends BasePresenter<Contract.View> implements Cont
             return;
         }
 
-        Api.getService().login(
-                view.getUserId(),
-                view.getUserPw()
-        )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        Api.getService().login(view.getUserId(), view.getUserPw())
+                .compose(networkTransformer())
+                .compose(disposeTransformer())
                 .subscribe(
                         userResponse -> onLoginResponse(userResponse)
                 );

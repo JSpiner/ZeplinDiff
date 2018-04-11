@@ -4,9 +4,6 @@ import net.jspiner.zeplindiff.KeyManager;
 import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.ui.base.BasePresenter;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class ProjectPresenter extends BasePresenter<Contract.View> implements Contract.Presenter {
 
     public ProjectPresenter(Contract.View view) {
@@ -21,8 +18,8 @@ public class ProjectPresenter extends BasePresenter<Contract.View> implements Co
     @Override
     public void requestProjectList() {
         Api.getService().getProjectList(KeyManager.getToken())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(networkTransformer())
+                .compose(disposeTransformer())
                 .subscribe(
                         projectModel -> view.addProjectList(projectModel.projects)
                 );

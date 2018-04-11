@@ -9,10 +9,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.RxLifecycle;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.subjects.BehaviorSubject;
+
 public abstract class BaseActivity<B extends ViewDataBinding, P extends BasePresenterInterface> extends AppCompatActivity {
 
     protected P presenter;
     protected B binding;
+
+    private BehaviorSubject disposeSubject = BehaviorSubject.create();
 
     @LayoutRes
     protected abstract int getLayoutId();
@@ -39,5 +49,10 @@ public abstract class BaseActivity<B extends ViewDataBinding, P extends BasePres
     protected void onDestroy() {
         super.onDestroy();
         presenter.detachView();
+        disposeSubject.onComplete();
+    }
+
+    public <T> LifecycleTransformer<T> disposeTransformer() {
+        return RxLifecycle.bind(disposeSubject);
     }
 }
