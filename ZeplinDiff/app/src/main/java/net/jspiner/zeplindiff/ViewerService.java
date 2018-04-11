@@ -120,25 +120,12 @@ public class ViewerService extends Service {
                 viewerBinding.image.scrollBy(0, -10);
             }
         });
-        /*
-        toggleBinding.up.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return false;
-            }
-        });*/
         toggleBinding.down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 viewerBinding.image.scrollBy(0, 10);
             }
-        });/*
-        toggleBinding.down.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return false;
-            }
-        });*/
+        });
     }
 
     @Override

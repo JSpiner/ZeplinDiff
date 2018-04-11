@@ -1,4 +1,4 @@
-package net.jspiner.zeplindiff;
+package net.jspiner.zeplindiff.ui.login;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,9 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import net.jspiner.zeplindiff.KeyManager;
+import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.model.User;
-import net.jspiner.zeplindiff.project.ProjectActivity;
+import net.jspiner.zeplindiff.ui.project.ProjectActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;

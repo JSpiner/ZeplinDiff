@@ -1,4 +1,4 @@
-package net.jspiner.zeplindiff.project;
+package net.jspiner.zeplindiff.ui.project;
 
 import android.content.Intent;
 import android.databinding.ViewDataBinding;
@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 
 import net.jspiner.zeplindiff.databinding.CardProjectBinding;
 import net.jspiner.zeplindiff.model.Project;
-import net.jspiner.zeplindiff.screen.ScreenActivity;
+import net.jspiner.zeplindiff.ui.screen.ScreenActivity;
 
 public class ProjectViewHolder extends RecyclerView.ViewHolder {
 

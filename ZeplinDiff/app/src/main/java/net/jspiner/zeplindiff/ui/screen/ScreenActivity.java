@@ -1,4 +1,4 @@
-package net.jspiner.zeplindiff.project;
+package net.jspiner.zeplindiff.ui.screen;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,16 +12,16 @@ import net.jspiner.zeplindiff.KeyManager;
 import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.databinding.ActivityProjectsBinding;
-import net.jspiner.zeplindiff.model.ProjectModel;
+import net.jspiner.zeplindiff.model.ScreenModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProjectActivity extends AppCompatActivity {
+public class ScreenActivity extends AppCompatActivity {
 
     private ActivityProjectsBinding binding;
-    private ProjectAdapter adapter;
+    private ScreenAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,24 +32,25 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
     private void init() {
-        adapter = new ProjectAdapter();
+        adapter = new ScreenAdapter();
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.recyclerView.setAdapter(adapter);
 
 
-        requestProjectList();
+        requestScreenList();
     }
 
-    private void requestProjectList() {
+    private void requestScreenList() {
         Log.d("token", "token : " + KeyManager.getToken());
-        Api.getService().getProjectList(
-                KeyManager.getToken()
-        ).enqueue(new Callback<ProjectModel>() {
+        Api.getService().getScreenList(
+                KeyManager.getToken(),
+                getIntent().getStringExtra("hash_id")
+        ).enqueue(new Callback<ScreenModel>() {
             @Override
-            public void onResponse(Call<ProjectModel> call, Response<ProjectModel> response) {
+            public void onResponse(Call<ScreenModel> call, Response<ScreenModel> response) {
                 switch (response.code()){
                     case 200:
-                        adapter.addAll(response.body().projects);
+                        adapter.addAll(response.body().screens);
                         break;
                     default:
                         Toast.makeText(getBaseContext(), "에러", Toast.LENGTH_LONG).show();
@@ -58,10 +59,9 @@ public class ProjectActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ProjectModel> call, Throwable t) {
-
+            public void onFailure(Call<ScreenModel> call, Throwable t) {
+                Toast.makeText(getBaseContext(), "에러" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
-
 }

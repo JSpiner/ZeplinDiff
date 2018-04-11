@@ -1,4 +1,4 @@
-package net.jspiner.zeplindiff.screen;
+package net.jspiner.zeplindiff.ui.project;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -7,22 +7,20 @@ import android.view.ViewGroup;
 
 import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.model.Project;
-import net.jspiner.zeplindiff.model.Screen;
-import net.jspiner.zeplindiff.project.ProjectViewHolder;
 
 import java.util.ArrayList;
 
-public class ScreenAdapter extends RecyclerView.Adapter<ScreenViewHolder> {
+public class ProjectAdapter extends RecyclerView.Adapter<ProjectViewHolder> {
 
-    private ArrayList<Screen> projectList = new ArrayList<>();
+    private ArrayList<Project> projectList = new ArrayList<>();
 
     @Override
-    public ScreenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ScreenViewHolder(
+        return new ProjectViewHolder(
                 DataBindingUtil.inflate(
                         LayoutInflater.from(parent.getContext()),
-                        R.layout.card_screen,
+                        R.layout.card_project,
                         parent,
                         false
                 )
@@ -35,7 +33,7 @@ public class ScreenAdapter extends RecyclerView.Adapter<ScreenViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ScreenViewHolder holder, int position) {
+    public void onBindViewHolder(ProjectViewHolder holder, int position) {
         holder.setData(
                 projectList.get(position)
         );
