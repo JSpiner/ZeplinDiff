@@ -15,7 +15,6 @@ public class ScreenActivity extends BaseActivity<ActivityProjectsBinding, Contra
 
     private static final int PROJECT_LIST_GRID_SPAN_COUNT = 2;
 
-    private ActivityProjectsBinding binding;
     private ScreenAdapter adapter;
 
     @Override

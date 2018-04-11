@@ -11,6 +11,11 @@ public class ScreenPresenter extends BasePresenter<Contract.View> implements Con
     }
 
     @Override
+    public void attachView() {
+        requestScreenList();
+    }
+
+    @Override
     public void requestScreenList() {
         Api.getService().getScreenList(KeyManager.getToken(), view.getProjectId())
                 .compose(networkTransformer())

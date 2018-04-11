@@ -29,13 +29,10 @@ public class ScreenViewHolder extends RecyclerView.ViewHolder {
         binding.projectName.setText(screen.name);
 
 
-        this.binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(binding.getRoot().getContext(), ViewerService.class);
-                intent.putExtra("url", screen.latestVersion.snapshot.url);
-                binding.getRoot().getContext().startService(intent);
-            }
+        this.binding.getRoot().setOnClickListener(view -> {
+            Intent intent = new Intent(binding.getRoot().getContext(), ViewerService.class);
+            intent.putExtra("url", screen.latestVersion.snapshot.url);
+            binding.getRoot().getContext().startService(intent);
         });
     }
 

@@ -107,31 +107,18 @@ public class ViewerService extends Service {
 
             }
         });
-        toggleBinding.close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stopSelf();
-            }
-        });
+
+        toggleBinding.close.setOnClickListener(view -> stopSelf());
         viewerBinding.image.scrollTo(0, 0);
 
-        toggleBinding.up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewerBinding.image.scrollBy(0, -10);
-            }
-        });
-        toggleBinding.down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewerBinding.image.scrollBy(0, 10);
-            }
-        });
+        toggleBinding.up.setOnClickListener(view -> viewerBinding.image.scrollBy(0, -10));
+        toggleBinding.down.setOnClickListener(view -> viewerBinding.image.scrollBy(0, 10));
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("TAG", "onDestroy");
         ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(
                 viewerBinding.getRoot());
         ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(
