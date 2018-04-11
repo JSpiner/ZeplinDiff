@@ -6,6 +6,7 @@ import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Api {
@@ -25,6 +26,7 @@ public class Api {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://api.zeplin.io/")
                     .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
                     .build();
 

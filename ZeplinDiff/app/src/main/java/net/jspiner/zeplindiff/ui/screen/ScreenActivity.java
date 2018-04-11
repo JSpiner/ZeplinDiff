@@ -14,6 +14,8 @@ import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.databinding.ActivityProjectsBinding;
 import net.jspiner.zeplindiff.model.ScreenModel;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,11 +43,10 @@ public class ScreenActivity extends AppCompatActivity {
     }
 
     private void requestScreenList() {
-        Log.d("token", "token : " + KeyManager.getToken());
         Api.getService().getScreenList(
                 KeyManager.getToken(),
                 getIntent().getStringExtra("hash_id")
-        ).subscribe(
+        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 screenModel -> {
                     adapter.addAll(screenModel.screens);
                 }

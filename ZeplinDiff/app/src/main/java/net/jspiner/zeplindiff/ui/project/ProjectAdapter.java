@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.model.Project;
+import net.jspiner.zeplindiff.ui.project.viewholder.ProjectViewHolder;
 
 import java.util.ArrayList;
 

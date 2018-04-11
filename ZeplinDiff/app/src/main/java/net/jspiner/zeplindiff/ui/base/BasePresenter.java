@@ -8,4 +8,13 @@ public abstract class BasePresenter<T> implements BasePresenterInterface {
         this.view = view;
     }
 
+    @Override
+    public void attachView() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
 }

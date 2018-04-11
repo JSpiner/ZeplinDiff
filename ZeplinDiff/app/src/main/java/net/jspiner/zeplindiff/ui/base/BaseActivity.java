@@ -25,6 +25,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, P extends BasePres
 
         setContentView(getLayoutId());
         presenter = createPresenter();
+        presenter.attachView();
     }
 
     @Override
@@ -32,5 +33,11 @@ public abstract class BaseActivity<B extends ViewDataBinding, P extends BasePres
         View view = LayoutInflater.from(this).inflate(layoutResID, null);
         binding = DataBindingUtil.bind(view);
         super.setContentView(view);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
     }
 }

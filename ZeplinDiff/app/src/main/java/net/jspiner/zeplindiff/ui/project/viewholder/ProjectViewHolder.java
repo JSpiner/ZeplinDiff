@@ -1,4 +1,4 @@
-package net.jspiner.zeplindiff.ui.project;
+package net.jspiner.zeplindiff.ui.project.viewholder;
 
 import android.content.Intent;
 import android.databinding.ViewDataBinding;
@@ -15,25 +15,23 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder {
 
     CardProjectBinding binding;
 
-    public ProjectViewHolder(final ViewDataBinding binding) {
+    public ProjectViewHolder(ViewDataBinding binding) {
         super(binding.getRoot());
         this.binding = (CardProjectBinding) binding;
     }
 
-    public void setData(final Project project){
+    public void setData(Project project){
         Glide.with(binding.getRoot().getContext())
                 .load(project.thumbnail)
                 .centerCrop()
                 .into(binding.image);
+
         binding.projectName.setText(project.name);
 
-        this.binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(binding.getRoot().getContext(), ScreenActivity.class);
-                intent.putExtra("hash_id", project._id);
-                binding.getRoot().getContext().startActivity(intent);
-            }
+        this.binding.getRoot().setOnClickListener(view -> {
+            Intent intent = new Intent(binding.getRoot().getContext(), ScreenActivity.class);
+            intent.putExtra("hash_id", project._id);
+            binding.getRoot().getContext().startActivity(intent);
         });
     }
 
