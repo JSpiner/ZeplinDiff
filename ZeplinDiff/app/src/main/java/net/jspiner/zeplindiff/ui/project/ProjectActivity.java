@@ -44,24 +44,11 @@ public class ProjectActivity extends AppCompatActivity {
         Log.d("token", "token : " + KeyManager.getToken());
         Api.getService().getProjectList(
                 KeyManager.getToken()
-        ).enqueue(new Callback<ProjectModel>() {
-            @Override
-            public void onResponse(Call<ProjectModel> call, Response<ProjectModel> response) {
-                switch (response.code()){
-                    case 200:
-                        adapter.addAll(response.body().projects);
-                        break;
-                    default:
-                        Toast.makeText(getBaseContext(), "에러", Toast.LENGTH_LONG).show();
-                        break;
-                }
-            }
+        ).subscribe(
+                projectModel -> {
+                    adapter.addAll(projectModel.projects);
 
-            @Override
-            public void onFailure(Call<ProjectModel> call, Throwable t) {
-
-            }
-        });
+                });
     }
 
 }

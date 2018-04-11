@@ -45,23 +45,10 @@ public class ScreenActivity extends AppCompatActivity {
         Api.getService().getScreenList(
                 KeyManager.getToken(),
                 getIntent().getStringExtra("hash_id")
-        ).enqueue(new Callback<ScreenModel>() {
-            @Override
-            public void onResponse(Call<ScreenModel> call, Response<ScreenModel> response) {
-                switch (response.code()){
-                    case 200:
-                        adapter.addAll(response.body().screens);
-                        break;
-                    default:
-                        Toast.makeText(getBaseContext(), "에러", Toast.LENGTH_LONG).show();
-                        break;
+        ).subscribe(
+                screenModel -> {
+                    adapter.addAll(screenModel.screens);
                 }
-            }
-
-            @Override
-            public void onFailure(Call<ScreenModel> call, Throwable t) {
-                Toast.makeText(getBaseContext(), "에러" + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        );
     }
 }

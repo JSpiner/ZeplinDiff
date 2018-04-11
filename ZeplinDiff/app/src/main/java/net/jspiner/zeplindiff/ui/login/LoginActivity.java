@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        if(KeyManager.getToken() != null){
+        if (KeyManager.getToken() != null) {
 
             Intent intent = new Intent(LoginActivity.this, ProjectActivity.class);
             startActivity(intent);
@@ -51,47 +51,29 @@ public class LoginActivity extends AppCompatActivity {
         final EditText id = (EditText) findViewById(R.id.id);
         final EditText pw = (EditText) findViewById(R.id.pw);
 
-        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        findViewById(R.id.login).setOnClickListener(view -> Api.getService().login(
+                id.getText().toString(),
+                pw.getText().toString()
+        ).subscribe(
+                userResponse -> {
+                    Log.d("login", "response : " + userResponse.body());
+                    switch (userResponse.code()) {
+                        case 412:
+                            Toast.makeText(getBaseContext(), "로그인 실패", Toast.LENGTH_LONG).show();
+                            break;
+                        case 200:
+                            Toast.makeText(getBaseContext(), "로그인 성공", Toast.LENGTH_LONG).show();
 
-                Api.getService().login(
-                        id.getText().toString(),
-                        pw.getText().toString()
-                ).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Log.d("login", "response : " + response.body());
-                        switch (response.code()){
-                            case 412:
-                                Toast.makeText(getBaseContext(), "로그인 실패", Toast.LENGTH_LONG).show();
-                                break;
-                            case 200:
-                                Toast.makeText(getBaseContext(), "로그인 성공", Toast.LENGTH_LONG).show();
+                            KeyManager.putToken(userResponse.body().token);
 
-                                KeyManager.putToken(response.body().token);
+                            Intent intent = new Intent(LoginActivity.this, ProjectActivity.class);
+                            startActivity(intent);
 
-                                Intent intent = new Intent(LoginActivity.this, ProjectActivity.class);
-                                startActivity(intent);
-
-                                break;
-
-                        }
+                            break;
                     }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-
-                    }
-                });
-
-            }
-        });
-
-
-
+                }
+        ));
     }
-
 }
 
 
