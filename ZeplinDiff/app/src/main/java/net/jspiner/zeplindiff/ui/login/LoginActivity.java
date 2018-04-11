@@ -16,18 +16,29 @@ import net.jspiner.zeplindiff.KeyManager;
 import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.api.Api;
 import net.jspiner.zeplindiff.model.User;
+import net.jspiner.zeplindiff.ui.base.BaseActivity;
+import net.jspiner.zeplindiff.ui.base.BasePresenterInterface;
 import net.jspiner.zeplindiff.ui.project.ProjectActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    protected BasePresenterInterface createPresenter() {
+        return null;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         init();
     }
