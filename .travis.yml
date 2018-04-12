@@ -1,0 +1,18 @@
+language: android
+jdk:
+  - oraclejdk8
+android:
+  components:
+    - tools
+    - platform-tools
+    - tools
+    - build-tools-26.0.2
+    - android-26
+    - extra-android-support
+    - extra-android-m2repository
+before_install:
+- chmod +x gradlew
+- chmod +rx app
+skip_cleanup: true
+script:
+- ./gradlew clean build
