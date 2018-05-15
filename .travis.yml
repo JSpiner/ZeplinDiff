@@ -11,7 +11,6 @@ android:
     - extra-android-support
     - extra-android-m2repository
 before_install:
-- chmod +x gradlew
 - chmod +rx app
 skip_cleanup: true
 script:
