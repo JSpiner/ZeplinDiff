@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +15,14 @@ import android.view.WindowManager;
 import android.widget.SeekBar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.databinding.ViewToggleBinding;
 import net.jspiner.zeplindiff.databinding.ViewViewerBinding;
+import net.jspiner.zeplindiff.utils.PixelUtils;
 
 public class ViewerService extends Service {
 
@@ -86,7 +91,13 @@ public class ViewerService extends Service {
         Log.d("service", "load url : " + url);
         Glide.with(getBaseContext())
                 .load(url)
-                .into(viewerBinding.image);
+                .into(new SimpleTarget<GlideDrawable>() {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        viewerBinding.scrollView.scrollTo(0, PixelUtils.dpToPx(1000));
+                        viewerBinding.image.setImageDrawable(resource);
+                    }
+                });
 
         toggleBinding.alpha.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -107,10 +118,8 @@ public class ViewerService extends Service {
         });
 
         toggleBinding.close.setOnClickListener(view -> stopSelf());
-        viewerBinding.image.scrollTo(0, 0);
-
-        toggleBinding.up.setOnClickListener(view -> viewerBinding.image.scrollBy(0, -10));
-        toggleBinding.down.setOnClickListener(view -> viewerBinding.image.scrollBy(0, 10));
+        toggleBinding.up.setOnClickListener(view -> viewerBinding.scrollView.scrollBy(0, -10));
+        toggleBinding.down.setOnClickListener(view -> viewerBinding.scrollView.scrollBy(0, 10));
     }
 
     @Override
