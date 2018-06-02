@@ -59,8 +59,8 @@ public class LoginPresenter extends BasePresenter<Contract.View> implements Cont
     }
 
     private boolean isUserInputVaild() {
-        return TextUtils.isEmpty(view.getUserId()) ||
-                TextUtils.isEmpty(view.getUserPw());
+        return TextUtils.isEmpty(view.getUserId()) == false &&
+                TextUtils.isEmpty(view.getUserPw()) == false;
     }
 
     private void onLoginResponse(Response<User> userResponse) {

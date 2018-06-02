@@ -45,9 +45,9 @@ public class ViewerService extends Service {
         mParams = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT,
-                Build.VERSION.SDK_INT< Build.VERSION_CODES.O ?
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY :
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.O ?
+                        WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY :
+                        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
 
@@ -56,7 +56,7 @@ public class ViewerService extends Service {
         mWindowManager.addView(toggleBinding.getRoot(), new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
-                Build.VERSION.SDK_INT< Build.VERSION_CODES.O ?
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.O ?
                         WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY :
                         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |

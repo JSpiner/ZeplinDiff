@@ -46,7 +46,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, Contract.P
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public boolean isScreenPermissionGranted() {
-        return true; //Settings.canDrawOverlays(this); TODO : 권환확인 메소드가 항상 false로 나오는 이슈 확인 필요
+        return Settings.canDrawOverlays(this);
     }
 
     @Override
