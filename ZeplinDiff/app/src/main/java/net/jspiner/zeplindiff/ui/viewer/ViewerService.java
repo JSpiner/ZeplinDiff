@@ -24,7 +24,16 @@ import net.jspiner.zeplindiff.databinding.ViewToggleBinding;
 import net.jspiner.zeplindiff.databinding.ViewViewerBinding;
 import net.jspiner.zeplindiff.utils.PixelUtils;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
+
 public class ViewerService extends Service {
+
+    private PublishSubject<Boolean> buttonEventSubject = PublishSubject.create();
+    private Disposable eventDisposable;
 
     private ViewViewerBinding viewerBinding;
     private ViewToggleBinding toggleBinding;
@@ -118,8 +127,38 @@ public class ViewerService extends Service {
         });
 
         toggleBinding.close.setOnClickListener(view -> stopSelf());
-        toggleBinding.up.setOnClickListener(view -> viewerBinding.scrollView.scrollBy(0, -10));
-        toggleBinding.down.setOnClickListener(view -> viewerBinding.scrollView.scrollBy(0, 10));
+        setButtonTouchEvent(toggleBinding.up, true);
+        setButtonTouchEvent(toggleBinding.down, false);
+
+        buttonEventSubject.subscribe(
+                isUp -> {
+                    if (isUp) {
+                        viewerBinding.scrollView.scrollBy(0, -10);
+                    }
+                    else {
+                        viewerBinding.scrollView.scrollBy(0, 10);
+                    }
+                }
+        );
+    }
+
+    private void setButtonTouchEvent(View view, boolean isUp) {
+        view.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    buttonEventSubject.onNext(isUp);
+                    eventDisposable = Observable.interval(500, 50, TimeUnit.MILLISECONDS).subscribe(
+                            __ -> {
+                                buttonEventSubject.onNext(isUp);
+                            }
+                    );
+                    break;
+                case MotionEvent.ACTION_UP:
+                    eventDisposable.dispose();
+                    break;
+            }
+            return false;
+        });
     }
 
     @Override
