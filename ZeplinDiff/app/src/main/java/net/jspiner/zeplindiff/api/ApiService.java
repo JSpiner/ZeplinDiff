@@ -32,7 +32,7 @@ public interface ApiService {
     );
 
     @GET("/v2/projects/{hash_id}")
-    Single<ScreenModel> getScreenList(
+    Single<Response<ScreenModel>> getScreenList(
             @Header("zeplin-token") String zeplinToken,
             @Path("hash_id") String hash_id
     );

@@ -3,6 +3,7 @@ package net.jspiner.zeplindiff.ui.screen;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.widget.Toast;
 
 import net.jspiner.zeplindiff.R;
 import net.jspiner.zeplindiff.databinding.ActivityProjectsBinding;
@@ -48,5 +49,10 @@ public class ScreenActivity extends BaseActivity<ActivityProjectsBinding, Contra
     @Override
     public String getProjectId() {
         return getIntent().getStringExtra("hash_id");
+    }
+
+    @Override
+    public void showErrorToast() {
+        Toast.makeText(getBaseContext(), "에러가 발생하였습니다.",Toast.LENGTH_SHORT).show();
     }
 }

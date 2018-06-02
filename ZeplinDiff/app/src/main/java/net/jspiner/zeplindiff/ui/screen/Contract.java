@@ -13,6 +13,8 @@ public interface Contract {
         void addScreenList(ArrayList<Screen> screenList);
 
         String getProjectId();
+
+        void showErrorToast();
     }
 
     interface Presenter extends BasePresenterInterface {

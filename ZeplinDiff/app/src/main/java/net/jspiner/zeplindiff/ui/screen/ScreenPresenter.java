@@ -20,6 +20,15 @@ public class ScreenPresenter extends BasePresenter<Contract.View> implements Con
         Api.getService().getScreenList(KeyManager.getToken(), view.getProjectId())
                 .compose(networkTransformer())
                 .compose(disposeTransformer())
-                .subscribe(screenModel -> view.addScreenList(screenModel.screens));
+                .subscribe(response -> {
+                    switch (response.code()) {
+                        case 200:
+                            view.addScreenList(response.body().screens);
+                            break;
+                        default:
+                            view.showErrorToast();
+
+                    }
+                });
     }
 }
