@@ -48,9 +48,7 @@ public class ViewerService extends Service {
                 Build.VERSION.SDK_INT< Build.VERSION_CODES.O ?
                 WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY :
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                        | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
 
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
