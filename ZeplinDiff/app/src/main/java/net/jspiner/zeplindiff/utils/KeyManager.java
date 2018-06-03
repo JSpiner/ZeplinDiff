@@ -2,6 +2,7 @@ package net.jspiner.zeplindiff.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.VisibleForTesting;
 
 import net.jspiner.zeplindiff.ZeplinDiffApplication;
 
@@ -11,11 +12,16 @@ public class KeyManager {
 
     private static final String KEY_TOKEN = "token";
 
+    private static SharedPreferences sharedPreferences;
+
     private static SharedPreferences getSharedPreference(){
-        return ZeplinDiffApplication.getInstance().getSharedPreferences(
-                PREFERENCE_NAME,
-                Context.MODE_PRIVATE
-        );
+        if (sharedPreferences == null) {
+            sharedPreferences = ZeplinDiffApplication.getInstance().getSharedPreferences(
+                    PREFERENCE_NAME,
+                    Context.MODE_PRIVATE
+            );
+        }
+        return sharedPreferences;
     }
 
     private static SharedPreferences.Editor getEditor(){
