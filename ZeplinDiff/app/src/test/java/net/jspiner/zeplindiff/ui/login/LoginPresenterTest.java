@@ -27,6 +27,8 @@ import static org.mockito.Mockito.when;
 public class LoginPresenterTest {
 
     private final String TEST_LOGIN_KEY = "TEST_LOGIN_TOKEN";
+    private final String TEST_ACCOUNT_ID = "test@test.com";
+    private final String TEST_ACCOUNT_PW = "test1234";
 
     private LoginPresenter presenter;
     @Mock
@@ -75,4 +77,41 @@ public class LoginPresenterTest {
                 presenter.isLogined()
         );
     }
+
+    @Test
+    public void onLoginButtonClick_EmptyIdTest() {
+        presenter.onLoginButtonClicked(
+                null,
+                TEST_ACCOUNT_PW
+        );
+        verify(view).showInputInvaildToast();
+    }
+
+    @Test
+    public void onLoginButtonClick_EmptyPwTest() {
+        presenter.onLoginButtonClicked(
+                TEST_ACCOUNT_ID,
+                null
+        );
+        verify(view).showInputInvaildToast();
+    }
+
+    @Test
+    public void onLoginButtonClick_EmptyIdPwTest() {
+        presenter.onLoginButtonClicked(
+                null,
+                null
+        );
+        verify(view).showInputInvaildToast();
+    }
+
+//    @Test
+    public void onLoginButtonClick_DismatchIdPwTest() {
+        presenter.onLoginButtonClicked(
+                TEST_ACCOUNT_ID,
+                TEST_ACCOUNT_PW
+        );
+        verify(view).showIdPwDismatchToast();
+    }
+
 }
