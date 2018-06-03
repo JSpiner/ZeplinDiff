@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
+apply plugin: 'com.github.kt3k.coveralls'
 
 android {
     compileSdkVersion 26
@@ -16,6 +18,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -54,4 +59,13 @@ dependencies {
 
     // test
     testCompile 'junit:junit:4.12'
+}
+
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/jacoco/jacocoTestDebugUnitTestReport/jacocoTestDebugUnitTestReport.xml"
+}
+
+tasks.coveralls {
+    dependsOn 'test'
+    onlyIf { System.env.'CI' }
 }
