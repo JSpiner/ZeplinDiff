@@ -3,7 +3,7 @@ package net.jspiner.zeplindiff.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import net.jspiner.zeplindiff.ZplinDiffApplication;
+import net.jspiner.zeplindiff.ZeplinDiffApplication;
 
 public class KeyManager {
 
@@ -12,7 +12,7 @@ public class KeyManager {
     private static final String KEY_TOKEN = "token";
 
     private static SharedPreferences getSharedPreference(){
-        return ZplinDiffApplication.getInstance().getSharedPreferences(
+        return ZeplinDiffApplication.getInstance().getSharedPreferences(
                 PREFERENCE_NAME,
                 Context.MODE_PRIVATE
         );

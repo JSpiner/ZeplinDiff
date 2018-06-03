@@ -2,7 +2,7 @@ package net.jspiner.zeplindiff;
 
 import android.app.Application;
 
-public class ZplinDiffApplication extends Application {
+public class ZeplinDiffApplication extends Application {
 
     private static Application application;
 
