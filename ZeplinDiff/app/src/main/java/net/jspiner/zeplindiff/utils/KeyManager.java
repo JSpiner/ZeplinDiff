@@ -29,4 +29,8 @@ public class KeyManager {
     public static String getToken(){
         return getSharedPreference().getString(KEY_TOKEN, null);
     }
+
+    public static void clear() {
+        getEditor().clear();
+    }
 }
