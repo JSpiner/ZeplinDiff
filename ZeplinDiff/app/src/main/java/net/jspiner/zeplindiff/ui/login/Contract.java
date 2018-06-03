@@ -10,27 +10,18 @@ public interface Contract {
 
     interface View extends BaseViewInterface {
 
-        @RequiresApi(Build.VERSION_CODES.M)
-        boolean isScreenPermissionGranted();
-
-        void requestScreenPermission();
-
-        void startProjectActivity();
-
-        String getUserId();
-
-        String getUserPw();
-
         void showInputInvaildToast();
 
         void showIdPwDismatchToast();
 
         void showLoginSuccessToast();
+
+        void startProjectActivity();
     }
 
     interface Presenter extends BasePresenterInterface {
-        void checkScreenPermission();
-        void requestLogin();
+        void onLoginButtonClicked(String id, String password);
+        boolean isLogined();
     }
 
 }

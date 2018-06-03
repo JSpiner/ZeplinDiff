@@ -25,42 +25,34 @@ public class LoginPresenter extends BasePresenter<Contract.View> implements Cont
     }
 
     private void init() {
-        checkScreenPermission();
     }
 
     @Override
-    public void checkScreenPermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || view.isScreenPermissionGranted()) {
-            checkLogin();
-        } else {
-            view.requestScreenPermission();
-        }
-    }
-
-    private void checkLogin() {
-        if (KeyManager.getToken() != null) {
-            view.startProjectActivity();
-        }
+    public boolean isLogined() {
+        return KeyManager.getToken() != null;
     }
 
     @Override
-    public void requestLogin() {
-        if (isUserInputVaild() == false) {
+    public void onLoginButtonClicked(String id, String password) {
+        if (isUserInputVaild(id, password) == false) {
             view.showInputInvaildToast();
             return;
         }
+        requestLogin(id, password);
+    }
 
-        Api.getService().login(view.getUserId(), view.getUserPw())
+    private boolean isUserInputVaild(String id, String password) {
+        return TextUtils.isEmpty(id) == false &&
+                TextUtils.isEmpty(password) == false;
+    }
+
+    private void requestLogin(String id, String password) {
+        Api.getService().login(id, password)
                 .compose(networkTransformer())
                 .compose(disposeTransformer())
                 .subscribe(
                         userResponse -> onLoginResponse(userResponse)
                 );
-    }
-
-    private boolean isUserInputVaild() {
-        return TextUtils.isEmpty(view.getUserId()) == false &&
-                TextUtils.isEmpty(view.getUserPw()) == false;
     }
 
     private void onLoginResponse(Response<User> userResponse) {

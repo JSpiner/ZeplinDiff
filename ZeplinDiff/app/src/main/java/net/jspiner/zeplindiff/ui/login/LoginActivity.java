@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import net.jspiner.zeplindiff.R;
@@ -37,20 +38,36 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, Contract.P
 
     private void init() {
         initViews();
+        checkScreenPermission();
     }
 
     private void initViews() {
-        binding.login.setOnClickListener(__ -> presenter.requestLogin());
+        binding.login.setOnClickListener(__ -> presenter.onLoginButtonClicked(
+                binding.id.getText().toString(),
+                binding.pw.getText().toString()
+        ));
+    }
+
+    private void checkScreenPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || isScreenPermissionGranted()) {
+            checkLogin();
+        } else {
+            requestScreenPermission();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public boolean isScreenPermissionGranted() {
+    private boolean isScreenPermissionGranted() {
         return Settings.canDrawOverlays(this);
     }
 
-    @Override
-    public void requestScreenPermission() {
+    private void checkLogin() {
+        if (presenter.isLogined()) {
+            startProjectActivity();
+        }
+    }
+
+    private void requestScreenPermission() {
         Intent intent = new Intent(
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                 Uri.parse("package:" + getPackageName())
@@ -62,7 +79,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, Contract.P
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_SCREEN_PERMISSION) {
-            presenter.checkScreenPermission();
+            checkScreenPermission();
         }
     }
 
@@ -71,16 +88,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, Contract.P
         Intent intent = new Intent(this, ProjectActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public String getUserId() {
-        return binding.id.getText().toString();
-    }
-
-    @Override
-    public String getUserPw() {
-        return binding.pw.getText().toString();
     }
 
     @Override
