@@ -38,37 +38,42 @@ dependencies {
     })
 
     // android support
-    compile 'com.android.support:appcompat-v7:26.0.2'
-    compile 'com.android.support:gridlayout-v7:26.0.2'
-    compile 'com.android.support:recyclerview-v7:26.0.2'
+    implementation 'com.android.support:appcompat-v7:26.0.2'
+    implementation 'com.android.support:gridlayout-v7:26.0.2'
+    implementation 'com.android.support:recyclerview-v7:26.0.2'
 
     // network
-    compile 'com.squareup.retrofit2:retrofit:2.4.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.4.0'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
     // reactiveX
-    compile "io.reactivex.rxjava2:rxjava:2.1.12"
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
 
     // image loader
-    compile 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
 
     // test
-    testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:2.18.3"
-    testCompile "org.robolectric:robolectric:3.8"
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.18.3"
+    testImplementation "org.robolectric:robolectric:3.8"
 
+}
+
+
+jacoco {
+    toolVersion = "0.7.1.201405082137"
+}
+
+jacocoAndroidUnitTestReport {
+    html.enabled true
+    xml.enabled true
 }
 
 coveralls {
     jacocoReportPath = "${buildDir}/reports/jacoco/jacocoTestDebugUnitTestReport/jacocoTestDebugUnitTestReport.xml"
-}
-
-tasks.coveralls {
-    dependsOn 'test'
-    onlyIf { System.env.'CI' }
 }
